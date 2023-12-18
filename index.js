@@ -2,11 +2,11 @@ const express = require('express');
 const axios = require('axios');
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 app.use(express.json());
 
-app.use('/cbar', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const response = await axios.get(`https://cbar.az/currencies/${req.query.time}.xml`);
         res.json(response.data);
