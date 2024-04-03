@@ -9,7 +9,8 @@ app.use(express.json());
 app.get('/', async (req, res) => {
     try {
         const response = await axios.get(`https://cbar.az/currencies/${req.query.time}.xml`);
-        res.json(response.data);
+        const xml = await new DOMParser().parseFromString(response.data, "text/xml");
+        res.json(xml);
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
